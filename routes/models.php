@@ -3,6 +3,7 @@
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -19,4 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('courses', CourseController::class);
     Route::post('courses/{course}/toggle-active', [CourseController::class, 'toggleActive'])
         ->name('courses.toggle-active');
+
+    // Teachers routes
+    Route::resource('teachers', TeacherController::class);
 });

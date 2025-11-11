@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\AcademicYear;
 use App\Models\Course;
 use App\Models\School;
+use App\Models\Teacher;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -125,6 +126,81 @@ class DatabaseSeeder extends Seeder
 
             // Crear más cursos aleatorios
             Course::factory(20)->create();
+        }
+
+        // Crear profesores de ejemplo
+        if (Teacher::count() === 0) {
+            // Crear usuarios para profesores
+            $teachers = [
+                [
+                    'user' => [
+                        'name' => 'María González',
+                        'email' => 'maria.gonzalez@eduasist.edu.do',
+                        'password' => 'password',
+                        'email_verified_at' => now(),
+                    ],
+                    'teacher' => [
+                        'employee_code' => 'TCH001',
+                        'specialty' => 'Mathematics',
+                    ],
+                ],
+                [
+                    'user' => [
+                        'name' => 'Carlos Ramírez',
+                        'email' => 'carlos.ramirez@eduasist.edu.do',
+                        'password' => 'password',
+                        'email_verified_at' => now(),
+                    ],
+                    'teacher' => [
+                        'employee_code' => 'TCH002',
+                        'specialty' => 'Science',
+                    ],
+                ],
+                [
+                    'user' => [
+                        'name' => 'Ana Martínez',
+                        'email' => 'ana.martinez@eduasist.edu.do',
+                        'password' => 'password',
+                        'email_verified_at' => now(),
+                    ],
+                    'teacher' => [
+                        'employee_code' => 'TCH003',
+                        'specialty' => 'English',
+                    ],
+                ],
+                [
+                    'user' => [
+                        'name' => 'Pedro Sánchez',
+                        'email' => 'pedro.sanchez@eduasist.edu.do',
+                        'password' => 'password',
+                        'email_verified_at' => now(),
+                    ],
+                    'teacher' => [
+                        'employee_code' => 'TCH004',
+                        'specialty' => 'History',
+                    ],
+                ],
+                [
+                    'user' => [
+                        'name' => 'Laura Fernández',
+                        'email' => 'laura.fernandez@eduasist.edu.do',
+                        'password' => 'password',
+                        'email_verified_at' => now(),
+                    ],
+                    'teacher' => [
+                        'employee_code' => 'TCH005',
+                        'specialty' => 'Physical Education',
+                    ],
+                ],
+            ];
+
+            foreach ($teachers as $teacherData) {
+                $user = User::create($teacherData['user']);
+                Teacher::create(array_merge($teacherData['teacher'], ['user_id' => $user->id]));
+            }
+
+            // Crear más profesores aleatorios
+            Teacher::factory(15)->create();
         }
 
     }
